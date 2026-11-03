@@ -6,7 +6,7 @@ A Java backend project for an educational health information application. The pl
 
 ## Technology
 
-- Java 21
+- Java 25 (LTS)
 - Spring Boot 4.1.2
 - Maven
 - PostgreSQL with Spring Data JPA
@@ -17,7 +17,7 @@ The current dependencies are listed in [`pom.xml`](./pom.xml). There are no auth
 
 ## Prerequisites
 
-- JDK 21
+- JDK 25
 - PostgreSQL, if running the application with its configured JPA/PostgreSQL dependencies
 
 ## Run locally
@@ -38,6 +38,18 @@ Run the tests:
 ```powershell
 .\mvnw.cmd test
 ```
+
+## Run the frontend
+
+The React frontend is in the sibling `frontend/` folder and runs separately from Spring Boot during development. Open a second terminal from the `smarthhealth/` project folder:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite. To create a production build, run `npm run build` from the `frontend/` directory.
 
 ## Planned integrations
 
