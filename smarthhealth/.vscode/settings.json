@@ -2,8 +2,8 @@
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.configuration.runtimes": [
         {
-            "name": "JavaSE-25",
-            "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.5.8-hotspot",
+            "name": "JavaSE-17",
+            "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.21.9-hotspot",
             "default": true
         }
     ],
