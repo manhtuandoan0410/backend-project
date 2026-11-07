@@ -1,14 +1,14 @@
-# Smart Health Assistant frontend
+# Smart Health Assistant mobile app
 
-This React + TypeScript app uses Vite. It is the frontend for the Spring Boot application in the sibling `backend/` folder.
-
-From this directory, install dependencies and start the development server:
+The frontend is an Expo and React Native app. Install dependencies and start Expo from this directory:
 
 ```powershell
 npm install
-npm run dev
+npm start
 ```
 
-Vite prints the local URL to open in your browser. In a second terminal, start the backend from the `backend/` folder with `.\mvnw.cmd spring-boot:run`.
+Scan the QR code with Expo Go, or press `a` to open an Android emulator. Run `npm run typecheck` to check TypeScript.
 
-To check or build the frontend, run `npm run lint` or `npm run build`.
+The disease search currently shows placeholder sample information. The Spring backend integration will be connected later through `services/api.ts`.
+
+For a physical phone to reach a backend running on your computer, set `EXPO_PUBLIC_API_BASE_URL` in `.env.local` to your computer's LAN IP and backend port (for example, `http://192.168.1.25:8080`). The phone and computer must be on the same network, and the backend must accept connections from that network. `localhost` refers to the phone itself on a physical device. Expo public environment variables are included in the app bundle, so never put private API credentials in them.

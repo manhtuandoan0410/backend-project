@@ -1,60 +1,91 @@
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField';
-
-import { useState, type SubmitEvent } from 'react';
-
-import ConditionResult from '../components/ConditionResult';
+import { useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import ConditionResult from './ConditionResult';
 import type { Condition } from '../src/types';
 
 export default function Mainpage() {
     const [name, setName] = useState("");
     const [result, setResult] = useState<Condition | null>(null);
-    // const [submittedSearch, setSubmittedSearch] = useState<{
-    //     name: string;
-    //     timestamp: string;
-    // } | null>(null);
 
-    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {e.preventDefault();
-
-        if (!name.trim()) {
-            alert("Name is required")
-            return;
-        }
-
+    const handleSubmit = () => {
+        const query = name.trim();
+        if (!query) return;
         setResult({
-            name: name.trim(),
+            name: query,
             causes: "Sample causes (placeholder)",
             symptoms: "Sample (placeholder)",
             treatment: "sample",
         });
-        // setSubmittedSearch({
-        //     name: name.trim(),
-        //     timestamp: new Date().toLocaleDateString(),
-        // });
-
         setName("");
     }
 
     return (
-        <Stack spacing={3}>
-            <Stack
-                component="form"
-                onSubmit={handleSubmit}
-                direction="row"
-                spacing={2}
-            >
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Disease or condition"
+        <ScrollView
+            contentContainerStyle={styles.content}
+            keyboardShouldPersistTaps="handled"
+        >
+            <View style={styles.searchRow}>
+                <TextInput
+                    accessibilityLabel="Disease or condition"
+                    placeholder="Disease or condition"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChangeText={setName}
+                    onSubmitEditing={handleSubmit}
+                    returnKeyType="search"
+                    style={styles.input}
                 />
-                <Button type="submit" variant="contained" size="small">Search</Button>
-            </Stack>
-
+                <Pressable
+                    accessibilityRole="button"
+                    onPress={handleSubmit}
+                    style={({ pressed }) => [styles.searchButton, pressed && styles.pressed]}
+                >
+                    <Text style={styles.searchButtonText}>Search</Text>
+                </Pressable>
+            </View>
             {result && <ConditionResult condition={result} />}
-        </Stack>
+        </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    content: {
+        flexGrow: 1,
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 32,
+        paddingBottom: 24,
+    },
+    searchRow: {
+        width: '100%',
+        maxWidth: 600,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+    },
+    input: {
+        flex: 1,
+        minHeight: 52,
+        paddingHorizontal: 14,
+        borderWidth: 1,
+        borderColor: '#b8cec6',
+        borderRadius: 10,
+        backgroundColor: '#ffffff',
+        color: '#18352f',
+        fontSize: 16,
+    },
+    searchButton: {
+        minHeight: 48,
+        justifyContent: 'center',
+        paddingHorizontal: 18,
+        borderRadius: 10,
+        backgroundColor: '#167d68',
+    },
+    pressed: {
+        opacity: 0.8,
+    },
+    searchButtonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: '700',
+    },
+});
