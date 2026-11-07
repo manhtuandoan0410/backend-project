@@ -1,10 +1,11 @@
-import Mainpage from './Mainpage'
 import './App.css'
+import Mainpage from '../components/Mainpage'
+import ButtonAppBar from '../components/ButtonAppBar'
 
 function App() {
     return (
         <>
-            <h1>Smart Health Assistant</h1>
+            <ButtonAppBar />
             <Mainpage />
         </>
     );
