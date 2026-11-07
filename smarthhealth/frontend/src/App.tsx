@@ -5,7 +5,7 @@ import ButtonAppBar from '../components/ButtonAppBar'
 export default function App() {
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" backgroundColor="#f3f8f6" />
+            <StatusBar barStyle="dark-content" />
             <ButtonAppBar />
             <Mainpage />
         </SafeAreaView>
